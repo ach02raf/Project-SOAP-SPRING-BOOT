@@ -35,4 +35,30 @@ public class calculatorClient extends WebServiceGatewaySupport {
 
         return information;
     }
+
+    public DivideResponse getDivideResult(int a, int b) {
+        Divide divide = new Divide();
+        divide.setIntA(a);
+        divide.setIntB(b);
+        log.info("Requesting location for " + divide);
+        DivideResponse information = (DivideResponse) getWebServiceTemplate()
+                .marshalSendAndReceive("http://www.dneonline.com/calculator.asmx", divide,
+                        new SoapActionCallback(
+                                "http://tempuri.org/Divide"));
+
+        return information;
+    }
+
+    public SubtractResponse getSubtractResult(int a, int b) {
+        Subtract subtract = new Subtract();
+        subtract.setIntA(a);
+        subtract.setIntB(b);
+        log.info("Requesting location for " + subtract);
+        SubtractResponse information = (SubtractResponse) getWebServiceTemplate()
+                .marshalSendAndReceive("http://www.dneonline.com/calculator.asmx", subtract,
+                        new SoapActionCallback(
+                                "http://tempuri.org/Subtract"));
+
+        return information;
+    }
 }
