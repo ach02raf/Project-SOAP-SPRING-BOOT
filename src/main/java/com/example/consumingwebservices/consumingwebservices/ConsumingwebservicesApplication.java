@@ -20,9 +20,21 @@ public class ConsumingwebservicesApplication {
 
 			AddResponse Response = client.getAddResult(5, 8);
 			MultiplyResponse Response2 = client.getMultiplyResult(5, 5);
-			int information2 = Response2.getMultiplyResult();
+
+			DivideResponse Response3 = client.getDivideResult(15, 5);
+			SubtractResponse Response4 = client.getSubtractResult(15, 5);
+
 			int information = Response.getAddResult();
-			System.err.println("resultat add : " + information + " ,resultat Multiply : " + information2);
+
+			int information2 = Response2.getMultiplyResult();
+
+			int information3 = Response3.getDivideResult();
+
+			int information4 = Response4.getSubtractResult();
+
+			System.err.println("*** Output ****** ");
+			System.err.println("  resultat add : " + information + " \n  resultat Multiply : " + information2
+					+ " \n  resultat Divide  : " + information3 + " \n  resultat Subtract : " + information4);
 
 		};
 	}
