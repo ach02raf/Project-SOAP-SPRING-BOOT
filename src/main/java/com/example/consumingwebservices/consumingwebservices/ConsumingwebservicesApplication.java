@@ -4,10 +4,16 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import com.example.ws.calculator.*;
 
 @SpringBootApplication
+@RestController
 public class ConsumingwebservicesApplication {
 
 	public static void main(String[] args) {
@@ -19,9 +25,11 @@ public class ConsumingwebservicesApplication {
 		return args -> {
 
 			AddResponse Response = client.getAddResult(5, 8);
+
 			MultiplyResponse Response2 = client.getMultiplyResult(5, 5);
 
 			DivideResponse Response3 = client.getDivideResult(15, 5);
+
 			SubtractResponse Response4 = client.getSubtractResult(15, 5);
 
 			int information = Response.getAddResult();
@@ -37,5 +45,15 @@ public class ConsumingwebservicesApplication {
 					+ " \n  resultat Divide  : " + information3 + " \n  resultat Subtract : " + information4);
 
 		};
+	}
+
+	@GetMapping("/getData/{country}")
+	@ResponseBody
+	private Object getdata(@PathVariable("country") String country) {
+		RestTemplate rest = new RestTemplate();
+		Object Result = rest.getForObject("http://universities.hipolabs.com/search?country=" + country,
+				Object.class);
+		return Result;
+
 	}
 }
